@@ -1,0 +1,43 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: mysql:5.7
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: discover-engine
+      MYSQL_USER: discover-engine
+      MYSQL_PASSWORD: password
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - ./volumes/mysql:/var/lib/mysql
+    ports:
+      - 3010:3306
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - 3011:80
+    environment:
+      PMA_HOST: db
+
+#  maya-backend:
+#    image: ct/maya-backend:5.0.0
+#    restart: unless-stopped
+#    depends_on:
+#      - db
+#    ports:
+#      - 5000:5000
+#    environment:
+#      AUTH_TYPE: memory
+#      MIKRO_ORM_HOST: db
+#      MIKRO_ORM_PORT: 3306
+#      MIKRO_ORM_TYPE: mysql
+#      MIKRO_ORM_DB_NAME: discover-engine
+#      MIKRO_ORM_USER: discover-engine
+#      MIKRO_ORM_PASSWORD: password
+#      MIKRO_ORM_DEBUG: 1
