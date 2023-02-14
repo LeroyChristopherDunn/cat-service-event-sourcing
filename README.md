@@ -1,6 +1,6 @@
 ## Description
 
-Service that replays events on start to construct in-memory projection  
+Event sourcing service that replays events on startup to construct in-memory projection.  
 
 [Event store](https://github.com/LeroyChristopherDunn/event-store-nestjs)  
 [Nest framework](https://github.com/nestjs/nest)
